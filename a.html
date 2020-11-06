@@ -1,0 +1,139 @@
+<! DOCTYP html >
+  <html>
+    <head>
+      <style>
+        body{
+          background-color:brown;
+        }
+       header{
+         margin:20px;
+         text-align: center;
+         background-color:rgb(16, 163, 139);
+       }
+       nav{
+        margin:20px;
+        text-align: center;
+       }
+       #Top{
+        margin:20px;
+        float: right;
+        width:85%;
+        text-align: center;
+        background-color:darkgray;
+       }
+        
+       aside{
+        margin:20px;
+        float: left;
+        height: 300px;
+        background-color:rgb(9, 155, 199);
+
+       }
+     
+       #Bottun{
+        margin:20px;
+        text-align: center;
+        clear: both;
+
+
+       }
+       footer{
+        margin:20px;
+        clear: both;
+        text-align: center;
+
+       }
+       .classA{
+         font-size: large;
+         color:deeppink;
+       }
+
+       .classhide{
+         display:none;
+       }
+
+       .classShow{
+         display:block;
+       }
+
+       
+
+
+      </style>
+    </head>
+     <body>
+       <header>
+         <h1>  Hi !</h1>
+         <h2> Iam a Desing</h2>
+      </header>
+        <nav>
+          <a href="#">HOME</a>
+          <a href="#">BOOK</a>
+          <a href="#">Cv</a>
+        </nav>
+        
+
+
+        <section id="Top">
+          <button onclick="getAllP()"> Here</button>
+        <button onclick="getId()"> ID</button>
+        <button onclick="hide()"> Hide</button>
+        <button onclick="show()"> Show</button>
+
+        <div id="mypage">
+          <h1> ghghjh</h1>
+
+          <h1> About</h1>
+          <p>BandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandrBandr</p>
+        </section>
+        <aside >
+         <nav>
+           <button onclick="bodyChildren()"> Click</button>
+         
+          <a href="#">HOME</a><br>
+          <a href="#">BOOK</a><br>
+          <a href="#">Cv</a><br>
+        </nav>
+      </aside>
+        <section id="Bottun">
+         <img src="#">
+         <img src="#">
+         <img src="#">
+         <img src="#">
+         <img src="#">
+        </section>
+      </div>
+        <footer> Thanks For Visting We Websit C 2020</footer>
+        <script>
+         function bodyChildren(){
+           par = document.body.children[4].innerHTML;
+           alert(par);
+         }
+          
+          function getAllP(){
+            p=document.getElementsByTagName("a");
+            alert(p[0].innerHTML);
+            alert(p[1].innerHTML);
+            alert(p[2].innerHTML);
+            alert(p.length)
+          }
+
+          function getId(){
+            ID = document.getElementById("Top");
+            ID.setAttribute("class","classA");
+          }
+
+          function hide(){
+            ID = document.getElementById("mypage");
+            ID.setAttribute("class","classhide");
+          }
+
+          
+          function show(){
+            ID = document.getElementById("mypage");
+            ID.setAttribute("class","classShow");
+          }
+
+          </script>
+     </body>
+  </html>
