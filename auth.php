@@ -5,32 +5,31 @@ require_once 'config.php';
 
 if(isset($_GET['aut'])){
     $sql = "SELECT * FROM cv WHERE cv_id = ?";
-  if($stmt = mysqli_prepare($link,$sql)){
+    if($stmt = mysqli_prepare($link,$sql)){
+        mysqli_stmt_bind_param($stmt,"i",$id_param);
 
-      mysqli_stmt_bind_param($stmt,"i",$param_id);
+        $id_param = trim($_GET['aut']);
 
-      $param_id = trim($_GET['aut']);
+        if(mysqli_stmt_execute($stmt)){
+            $result = mysqli_stmt_get_result($stmt);
 
-      if(mysqli_stmt_execute($stmt)){
-        $result = mysqli_stmt_get_result($stmt);
+            if(mysqli_num_rows($result) == 1){
+                $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-      if(mysqli_num_rows($result) == 1) {
-          $rows = mysqli_fetch_array($result,MYSQLI_ASSOC);
-            
-          $name = $rows['p_name'];
-          $pic = $rows['p_pic'];
-          $cv = $rows['cv_content'];
-      }
-      else{
-          header("location: author2.php");
-          exit();
-      }
-  }
-  else{
-      echo " Oops ! Something Went Wrong. Try Agian";
-  }
-  mysqli_stmt_close($stmt);
+                $Author_Name = $row['p_name'];
+                $image       = $row['p_pic'];
+                $cv          = $row['cv_conte'];
+
+            }else{
+                header("location: error.php");
+                exit();
+            }
+        }else{
+            echo "Oops! Something went wrong. Please try again later.";
+    }
 }
+
+mysqli_stmt_close($stmt);
 }else{
     echo " Wrong ! !";
 }
@@ -41,7 +40,10 @@ if(isset($_GET['aut'])){
 <!DOCTYPE html>
     <html>
         <head>
-        <title> <?php echo $name; ?> </title>
+        <title><?php echo $Author_Name; ?></title>
+        <link rel="icon" href="images/wbelogo.png" type="image/png">
+
+
 
            <style>
                img {
@@ -57,8 +59,8 @@ if(isset($_GET['aut'])){
         <br />
         <section>
         <div id="bo">
-       <h1> <?php echo $name; ?> </h1>
-       <?php   echo "<img src='images/".$pic."'\"width=\"200px\" height=\"300px\">"; ?>
+       <h1> <?php echo $Author_Name; ?> </h1>
+       <?php   echo "<img src='images/".$image."'\"width=\"200px\" height=\"300px\">"; ?>
        <p> <?php echo $cv; ?> </p><br><br>
        </div>
        <section>

@@ -18,52 +18,12 @@ if(!$conn){
 <!doctype html>
 <html lang="en">
   <head>
-  <style>
-      #a{
-        color:grey;
-      }
-         
-#B{
-background-image: url('images/boo.jpg');
-border-bottom: 6px solid gray;
- background-color:gray;
- margin: 10px;
- padding: 10px;
-           
-height: 600px;
-border-left: 6px solid rgba(0, 0, 63, 0.417);
-border-right: 6px solid rgba(0, 0, 63, 0.417);
-
-
-}
-#a{
-  color:grey;
-}
-   
-    
-
- div.gallery {
-background-color:white;
- margin: 20px;
- border: 6px solid #ccc;
- float: left;
- width: 250px;
-height: 400px;
-}
-
-div.gallery:hover {
-  border: 6px solid #777;
-}
-
-div.gallery img {
-
-  width: 240px;
-  height: 300px;
-}
-    </style>
+    <title> literature</title>
+  <link href="frontStyle.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
   </head>
+
   <body>
     <header>
 

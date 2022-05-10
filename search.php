@@ -13,10 +13,23 @@ if(!$conn) {
 }
 //echo "Connected successfully";
 
+
+
 $se = $_GET['search'];
 
+$arr = array("/",
+             "'",
+             "%",
+             "&","
+             !","
+             or1",
+             "-or1=1'",
+             "@"
+            );
 
-if(!empty($se)){
+if(in_array($se,$arr,true)){
+    echo "Please Enter The Real Name  ! ";
+}elseif(!empty($se)){
     
 $sql ="SELECT * FROM books WHERE bk_name LIKE '%$se%'";
 $result = $conn->query($sql);
@@ -28,8 +41,12 @@ $result = $conn->query($sql);
     <a id="a" href="info.php?sow=<?php  echo $row['id']; ?> "><span> View </span></a></h5> <br /><br /> <?php 
       
    }
+}elseif(empty($se)){
+    echo "Type The Book Name ! ";
+
 }else{
-       echo "0 result";
-   }
+    echo "This Not found Any Serach, So Try SomeThing else ! ";
+}
+
 
 ?>

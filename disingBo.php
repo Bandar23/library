@@ -7,14 +7,14 @@ body {
 }
 #header{
 
-padding:50px;
+padding:10px;
 border: solid;
 background-image: url('book-background.jpg');
-border: 5px solid black;
+border: 5px solid white;
 background-color: lightblue;
 padding-top: 50px;
 padding-right: 30px;
-padding-bottom: 50px;
+padding-bottom: 150px;
 padding-left: 80px;
 
 }
@@ -31,15 +31,24 @@ text-align:left;
 }
 
 #nav{
-border: 5px solid rgba(0, 0, 30, 0.150);
+border: 5px solid white;
 background-color: black;
 color: white;
-padding-top: 3px;
-padding-right: 3px;
-padding-bottom: 3px;
-padding-left: 3px;
 
 }
+
+#nav ul a:hover{
+  background-color:grey;
+  width:100px
+
+}
+
+.dropdown-content a:hover{
+    background-color:grey;
+    width:100px
+
+  }
+
 
 #lin{
     text-align:center;
@@ -116,10 +125,7 @@ cursor: pointer;}
 }
 .mySlides {display:none;}
 
-a:hover{
-            border-bottom: 3px solid gray;
-            
-          }
+
 
  #search{
   width:200px;
@@ -131,33 +137,38 @@ a:hover{
 #search:focus{
   border:1px grey;
 }
+#a,p{
+  color: black;
+  text-decoration: none;
+
+
+}
+
 
 </style>
 </head>
 <body>
 <center>
 <div id = "header">
-<img src="fgf.jpg" alt="Me" width="200" height="200">
 </div>
 </center>
 
 <center>
 <nav id="nav">
 <ul>
-
-<a href="wa.php"> Home </a>   |     <a href="bo.php"> Books </a>  |    <a href="author2.php"> Authors </a>   |
+<a href="index.php"> Home </a><a href="bo.php"> Books </a><a href="author2.php"> Authors </a> 
 
 
 
 <div class="dropdown">
-  <button class="dropbtn">Sections</button>
+  <button class="dropbtn"><a href="Sections.php">Sections</a></button>
   <div class="dropdown-content">
   <a href="literature.php">literature</a>
   <a href="psychology.php">Psychology</a>
   <a href="Novel.php"> Anovel</a>
   <a href="Articles.php"> Articles</a>
  
-  </div> |      
+  </div>       
   <input id="search"  placeholder="Search.." />
   </nav>
 </div>
@@ -166,6 +177,7 @@ a:hover{
 
 
 <center>
+  
 </main>
       </div>
     </div>

@@ -6,11 +6,8 @@ $username = "root";
 $password = "";
 $dbname ="library";
 
-$conn = mysqli_connect($servername, $username, $password,$dbname);
 
-if(!$conn) {
-    die("Connection failed: " . mysqil_connect_error());
-}
+$link = mysqli_connect($servername, $username, $password, $dbname) or die($link);
 //echo "Connected successfully";
 
 
@@ -22,12 +19,13 @@ if(isset($_POST['Save'])){
     $file_size = $_FILES['pic']['size'];
     $file_tmp = $_FILES['pic']['tmp_name'];
     $file_type = $_FILES['pic']['type'];
-    $file_ext=strtolower(end(explode('.',$_FILES['pic']['name'])));
+    $temp= explode('.',$file_name);
+    $file_te = end($temp);
          
     $extensions= array("jpeg","jpg","png");
     
-    if(in_array($file_ext,$extensions)=== false){
-       $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+    if(in_array($file_te,$extensions) === false){
+       $errors[]="extension not allowed, please choose a JPEG or PNG or png file.";
     }
     
     if($file_size > 2097152) {
@@ -36,24 +34,25 @@ if(isset($_POST['Save'])){
     
     if(empty($errors)==true) {
        move_uploaded_file($file_tmp,"images/".$file_name);
-       echo "Success";
+       //echo "Success";
     }else{
        print_r($errors);
     }
     //$image  = $_FILES['pic']['name']; 
     //$target = "images/".basename($image);
     $author= $_POST['author'];
-    $brief= $_POST['brief'];
+    $brief = mysqli_real_escape_string($link,$_POST['brief']);
     $dep= $_POST['dep'];
 
 
-    $query = "INSERT INTO books (bk_name,pic,r_name,brief,sort) VALUES ('$name','$file_name','$author','$brief','$dep')";
+    $query = mysqli_query($link,"INSERT INTO books (bk_name,pic,r_name,brief,sort,D_ate) VALUES ('$name','$file_name','$author','$brief','$dep',SYSDATE())");
 
-    
-
-    mysqli_query($conn,$query);
-    $_SESSION['ads'] = " Inserting ";
-    header('location: insert.php'); 
+    if(!$query){
+      echo "Error: " . mysqli_error($link);
+      }else{
+         header("location:index_Books.php");
+         exit;
+      }
 
    }
 

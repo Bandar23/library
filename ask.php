@@ -5,8 +5,13 @@ require_once 'config.php';
 $email = $phone = $ask = "";
 $email_rr = $phone_rr = $ask_rr = "";
 
+$All_Tags = array("<h1>",
+                  "<h2>",
+                  "<h3>",
+                  "<h4>");
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+if(isset($_POST['Save'])){
 
     $input_email = trim($_POST['email']);
     if(empty($input_email)){
@@ -30,7 +35,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($input_ask)){
         $ask_rr = "--- Enter Your Ask ! ";
     }else{
-        $ask = $input_ask;
+
+      $ask = filter_var($input_ask,FILTER_SANITIZE_STRING);
+        
     }
 
     if(empty($email_rr) && empty($phone_rr) && empty($ask_rr)){
@@ -143,16 +150,18 @@ textarea{
 
 <h2>Ask Us !</h2>
 <div class="bg-img">
-  <form action="ask.php"  method="POST" class="container">
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?> " method="POST" class="container">
     <h1>Ask your question here</h1>
 
     <label for="email"><b>Your Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required><br>
-    <span class="error ">*<?php echo $email_rr ; ?> </span><br>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required onkeyup="emailFunction()"><br>
+    <span id="demo"></span>
+    <span class="error "><?php echo $email_rr ; ?> </span><br>
 
     <label for="phone"><b>Your Number</b></label>
-    <input type="number" placeholder="Enter your Phone Number" name="phone" required>
-    <span class="error ">*<?php echo $phone_rr ; ?> </span><br>
+    <input type="number" placeholder="Enter your Phone Number" name="phone" id="number" required onkeyup="numberFunction()"><br>
+    <span id="NumberValid"></span>
+    <span class="error "><?php echo $phone_rr ; ?> </span><br>
 
 
     <label for="phone"><b>Your Ask</b></label>
@@ -160,10 +169,11 @@ textarea{
     <span class="error ">*<?php echo $ask_rr ; ?> </span><br>
 
 
-    <button type="submit" class="btn">Send</button>
+    <button type="submit" name="Save" class="btn" id="button">Send</button>
   </form>
 </div>
 
 
+<script src="mainJs.js"></script>
 </body>
 </html>

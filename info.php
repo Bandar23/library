@@ -63,6 +63,7 @@ if($stmt = mysqli_prepare($conn,$sql)){
 <!doctype html>
 <html>
   <head>
+  <title> <?php  echo $name ; ?> </title>
   <style>
 #bo{
   border:  3px solid #777;
@@ -74,20 +75,17 @@ img {
     }
     h3{
   width:120px;
-  background-color: grey;
-  color: white;
+  color: grey;
 }
 
     h1{
   width:240px;
-  background-color: grey;
-  color: white;
+  color: grey;
 }
 
 h2{
   width:180px;
-  background-color: grey;
-  color: white;
+  color: grey;
 }
     
 
@@ -97,7 +95,6 @@ h2{
 <br>
 
 <div id="bo">
-<center>
 <?php 
 
    echo "<h1>".$name."</h1>"."<br>";
@@ -108,7 +105,6 @@ h2{
 
 
   ?>
-</center>
 </div>
 
 </body>

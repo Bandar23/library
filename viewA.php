@@ -30,15 +30,18 @@ if(isset($_GET['show'])){
         if(mysqli_num_rows($result) == 1){
             /* Fetch result row as an associative array. Since the result set
             contains only one row, we don't need to use while loop */
-            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
             
             // Retrieve individual field value
-            $name = $row["name_m"];
-            $content = $row["content"];
-            $author = $row["author"];
-            $t_ype = $row["t_ype"];
+            $Id_Article   = $row['p_no'];
+            $name         = $row["name_m"];
+            $content      = $row["content"];
+            $author       = $row["author"];
+            $t_ype        = $row["t_ype"];
+            $intro        = $row['intro'];
+            $pic          = $row['pic_ma'];
 
-        } else{
+        }else{
             // URL doesn't contain valid id parameter. Redirect to error page
             header("location: error.php");
             exit();
@@ -58,6 +61,16 @@ exit();
 }
 
 
+$Show_All = "SELECT * FROM articles Where t_ype = '".$t_ype."' AND p_no != '".$Id_Article."' ";
+
+$All_Result = mysqli_query($conn,$Show_All);
+
+if(!$All_Result){
+
+  echo "Something Wrong Whit The Query ! ";
+}
+
+
 
  ?>
 
@@ -65,39 +78,54 @@ exit();
 <!Doctype html>
 <html>
 <head>
-<style>
-  img {
-    border:  3px solid #777;
-    }
-    h3{
-  width:120px;
-  border:  3px solid #777;
-  color: black;
-}
+<link href="frontStyle.css" rel="stylesheet">
+<title> <?php echo $name; ?> </title>
+<link href="/book/bootstrap-4.5.3-dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    h1{
-  width:240px;
-  border:  3px solid #777;
-  color: black;
-}
-#bo{
-  border:  3px solid #777;
-  }
-  span{
-  color: red;
-  }
-</style>
+
 </head>
 <body>
 <br/>
-<center>
-<div id="bo">
-    <h1><?php  echo $name; ?></h1>
-    <p><?php  echo $content; ?></p>
-    <h3><?php  echo $author;  ?> </h3>
-    <span color='red'><?php  echo $t_ype;  ?> </span>
 
+<div class="card mb-3">
+  <?php echo "<img src='images/".$pic."'\"width=\"200px\" height=\"350px\" class='card-img-top'>"; ?><br /><br />
+  <div class="card-body">
+    <h5 class="card-title" id="s"><?php  echo $name; ?></h5>
+    <p class="card-text" id="c"><?php  echo $intro;?>.</p>
   </div>
-</center>
+</div>
+
+<br/><br />
+<p  id="f"><?php  echo $content; ?></p><br /><br />
+<div class="card">
+  <div class="card-header">
+  Writer
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <h5 class=""><?php  echo $author; ?> </h5>
+      <footer class="blockquote-footer">This Article Is: <cite title="Source Title"><?php  echo  $t_ype; ?></cite></footer>
+    </blockquote>
+
+   
+    <div class="similar">
+      
+<?php while($row = mysqli_fetch_array($All_Result)){ ?>
+   <div class="Fat">
+          <div class="img">
+          <?php echo "<img src='images/".$row['pic_ma']."'\"width=\"150px\" height=\"200px\">"; ?>
+          </div>
+          <div class="Hedaing">
+            <?php echo "<h3>".$row['name_m']."</h3>"; ?><br>
+            <a class="hr"  href="viewA.php?show=<?php echo $row['p_no'];  ?>"><button class="but"> Click </button></a>
+        </div>
+       </div>
+    </div>
+    <?php  } ?>
+
+</div>
+  </div>
+
+</div>
 </body>
 </html>
