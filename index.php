@@ -1,4 +1,5 @@
 <?php 
+
  require_once 'config.php';
 
  $sql = "SELECT * FROM books WHERE sort = 'psychology' AND r_name like 'Sigismund Schlomo Freud'" ; 
@@ -272,7 +273,7 @@ footer p{
 <center>
 <nav id="nav">
 <ul>
-<a href="wa.php"> Home </a> <a href="bo.php"> Books </a> <a href="author2.php">  Authors </a>    
+<a href="index.php"> Home </a> <a href="bo.php"> Books </a> <a href="author2.php">  Authors </a>    
 
 
 <div class="dropdown">
